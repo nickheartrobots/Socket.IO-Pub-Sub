@@ -8,6 +8,7 @@
     "dev": "nodemon bin/dev",
     "clean": "rmdir /s /q dist",
     "build": "mkdir dist && babel src -s -d dist",
+    "rebuild": "npm run clean && npm run build",
     "production": "node bin/production"
   },
   "author": "Nick Clarity",

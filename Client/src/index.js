@@ -9,15 +9,15 @@ if(process.env.IS_DEV){
     file = fs.readFileSync('./../config.json');    
 }
 
-const config = JSON.parse(file);
+const { ID, SUBSCRIBE_TO, INTERVAL } = JSON.parse(file).config;
 
 let socket = io.connect('http://localhost:3000', { reconnect: true });
 
 socket.on('connect', () => {
     console.log('Connected to Host...')
     socket.emit('subscribe', {
-        id: config.myId,
-        subIds: config.subscribeTo
+        id: ID,
+        subIds: SUBSCRIBE_TO
     }) 
     
     socket.on('data', obj => {
@@ -27,13 +27,13 @@ socket.on('connect', () => {
     //this is where you would send updates
     setInterval(() => {
         socket.emit('publish', {
-            id: config.myId,
+            id: ID,
             data: {
                 //example data
                 numbers: [1, 2, 3, 4]
             }
         })
-    }, config.interval);
+    }, INTERVAL);
 })
 
 socket.on('connect_error', e => {
