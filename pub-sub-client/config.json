@@ -1,0 +1,5 @@
+{
+    "myId": "some id here",
+    "subscribeTo": ["some other id", "yet another id"],
+    "interval": 1000
+}
